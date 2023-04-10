@@ -1,0 +1,14 @@
+
+.page{
+	padding: 50rpx 30rpx;
+}
+view{
+	line-height: 1.5;
+	font-size: 32rpx;
+}
+button{
+	margin-top: 30rpx;
+	height: 80rpx;
+	line-height: 80rpx;
+}
+

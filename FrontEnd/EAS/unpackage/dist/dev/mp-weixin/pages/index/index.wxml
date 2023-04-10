@@ -1,0 +1,1 @@
+<view class="page"><block wx:if="{{!hasLogin}}"><view>现在是未登录状态，点击按钮进行登录</view></block><block wx:else><view>{{"现在是登录状态，您的用户id是："+uerInfo.userName}}</view></block><button type="primary" data-event-opts="{{[['tap',[['bindLogin',['$event']]]]]}}" bindtap="__e">{{hasLogin?'退出登录':'登录'}}</button></view>

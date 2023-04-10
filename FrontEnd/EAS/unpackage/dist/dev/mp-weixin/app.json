@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/1/1",
+    "pages/2/2",
+    "pages/3/3",
+    "pages/4/4"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#007AFF",
+    "borderStyle": "black",
+    "backgroundColor": "#F8F8F8",
+    "list": [
+      {
+        "pagePath": "pages/1/1",
+        "text": "1"
+      },
+      {
+        "pagePath": "pages/2/2",
+        "text": "2"
+      },
+      {
+        "pagePath": "pages/3/3",
+        "text": "3"
+      },
+      {
+        "pagePath": "pages/4/4",
+        "text": "4"
+      }
+    ]
+  },
+  "usingComponents": {}
+}
