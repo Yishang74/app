@@ -1,5 +1,7 @@
 <template>
 	<view>
+		// <view v-for="(u,index) in user" :key="index">
+		// </view>
 		<u-cell-group>
 			<u-cell-group title="Class 1">
 				<u-cell-item title="Bruce" @click='checkStuInfo'></u-cell-item>
@@ -44,6 +46,30 @@
 		data() {
 			return {
 			}
+		},
+		onReady() {
+			let userInfoToken = uni.getStorageSync('uerInfo').token;
+			console.log("userInfoTokenSync:", userInfoToken)
+			uni.request({
+				url: `http://127.0.0.1:8080/ `,
+				header: {
+					"Content-Type": "application/x-www-form-urlencoded",
+					'Authorization': userInfoToken
+				},
+				data: {},
+				method: "GET",
+				success: (e) => {
+					console.log(e.data)
+					if (e.data.code === 200) {
+						
+					} else {
+						uni.showModal({
+							content: e.data.message,
+							showCancel: false
+						})
+					}
+				}
+			})
 		},
 		methods: {
 			checkStuInfo() {

@@ -119,16 +119,17 @@
 									},
 								});
 							}
+							if (this.roleId === 2) {
+								console.log("page");
+								uni.switchTab({
+									url: '/pages/class/class',
+									success() {
+										location.reload();
+									},
+								});
+							}
 						} 
-						if (this.roleId === 2) {
-							console.log("page");
-							uni.switchTab({
-								url: '/pages/class/class',
-								success() {
-									location.reload();
-								},
-							});
-						}else {
+						else {
 							uni.showModal({
 								content: e.data.message,
 								showCancel: false

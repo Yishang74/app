@@ -101,7 +101,14 @@
 							}
 						});
 					}
-					
+					if (roleId === 2) {
+						uni.switchTab({
+							url: '/pages//AddClass/AddClass',
+							success: () => {
+							    plus.navigator.closeSplashscreen();
+							}
+						});
+					}
 				
 			    } else {
 					//不存在则跳转至登录页

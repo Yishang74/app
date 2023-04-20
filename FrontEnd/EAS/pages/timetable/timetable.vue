@@ -17,6 +17,8 @@
                     controlWeek:1,//显示的第几周
                     weekButton:true,//开启上一周下一周按钮
                     startdDate:'', //开始时间  默认为当前时间
+					// <view v-for="(u,index) in user" :key="index">
+					// </view>
                     timetables: [
                       ['ML', 'ML', '', '', '', '', 'Project', 'Project',],
                       ['', '', 'SAT', 'SAT', '', 'SE', 'SE', '', '', '', '', ''],
@@ -39,6 +41,30 @@
                        { index: '12', name: '21:40\n22:20'}]
                 }
             },
+			onReady() {
+				let userInfoToken = uni.getStorageSync('uerInfo').token;
+				console.log("userInfoTokenSync:", userInfoToken)
+				uni.request({
+					url: `http://127.0.0.1:8080/`,
+					header: {
+						"Content-Type": "application/x-www-form-urlencoded",
+						'Authorization': userInfoToken
+					},
+					data: {},
+					method: "GET",
+					success: (e) => {
+						console.log(e.data)
+						if (e.data.code === 200) {
+							
+						} else {
+							uni.showModal({
+								content: e.data.message,
+								showCancel: false
+							})
+						}
+					}
+				})
+			},
             methods:{
                 courseClick(re){
                     console.log(re)
