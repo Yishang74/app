@@ -86,6 +86,41 @@
                 "enablePullDownRefresh": false
             }
             
+        },{
+            "path" : "pages/AddClass/AddClass",
+            "style" :                                                                                 
+            {
+                "navigationBarTitleText": "AddClass",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/subject/addSubject",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "课程信息",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/studentInfo/teacherInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "老师信息",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/Testtimetable/Testtimetable",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
     ],
 	"tabBar": {

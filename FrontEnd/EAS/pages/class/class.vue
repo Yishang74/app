@@ -1,23 +1,27 @@
 <template>
 	<view>
+		<u-search placeholder="班级名称" v-model="keyword" @search="search" @custom="search"></u-search>
 		<u-table style="padding: -20upx 0; ">
 			<u-tr class="myclass">
 				<u-th>id</u-th>
-				<u-th>Name</u-th>
-				<u-th>Student Number</u-th>
-				<u-th>Manage</u-th>
+				<u-th>班级名称</u-th>
+				<u-th>操作</u-th>
 			</u-tr>
 			<u-tr v-for="item in allclass">
-				<u-td>{{item.classid}}</u-td>
-				<u-td style="color: #54b4ef;"><span @click="showClass(item)">{{item.Name}}</span></u-td>
-				<u-td>{{item.StudentNumber}}</u-td>
-				<u-td style="color: orangered;"><span @click="deleteClass(item)">{{item.Manage}}</span></u-td>
+				<u-td>{{item.id}}</u-td>
+				<u-td style="color: #54b4ef;"><span @click="showClass(item)">{{item.className}}</span></u-td>
+				<u-td style="color: orangered;"><span @click="deleteClass(item)">删除</span></u-td>
 			</u-tr>
-			<div class="myicon">
-				<u-icon name="plus-circle-fill" style="float: right ;" size="100" color="#54b4ef" @click="showAdd()">
-				</u-icon>
-			</div>
+
 		</u-table>
+		<view class="uni-pagination-box">
+			<uni-pagination show-icon :page-size="pageSize" :current="pageCurrent" :total="total" @change="change" />
+		</view>
+		<div class="myicon">
+			<u-icon name="plus-circle-fill" style="float: right ;" size="100" color="#54b4ef" @click="showAdd()">
+			</u-icon>
+		</div>
+
 		<!-- <u-modal v-model="showwarning" :content="content"  show-cancel-button="true" title="Warning"></u-modal> -->
 	</view>
 
@@ -32,41 +36,50 @@
 	export default {
 		data() {
 			return {
-				allclass: [{
-						classid: 1,
-						Name: 'class one',
-						StudentNumber: 3,
-						Manage: 'Delete'
-					},
-					{
-						classid: 2,
-						Name: 'class two',
-						StudentNumber: 3,
-						Manage: 'Delete'
-					},
-					{
-						classid: 3,
-						Name: 'class three',
-						StudentNumber: 3,
-						Manage: 'Delete'
-					},
+				url: 'http://127.0.0.1:8080',
+				keyword: '',
+				pageSize: 20,
+				pageCurrent: 1,
+				// 数据总量
+				total: 0,
+				allclass: [
 
 				]
 			}
 		},
 		methods: {
-
+			change(e) {
+				this.search(e.current)
+			},
+			search() {
+				uni.request({
+					url: `${this.url}/admin/class/${this.pageCurrent}/${this.pageSize}`,
+					data: {
+						className: this.keyword
+					},
+					success: (e) => {
+						console.log(e.data)
+						if (e.data.code === 200) {
+							this.allclass = e.data.data.records
+						} else {
+							uni.showModal({
+								content: e.data.message,
+								showCancel: false
+							})
+						}
+					},
+					fail: (e) => {
+						uni.showModal({
+							content: "请求失败，请重试！",
+							showCancel: false
+						})
+					}
+				})
+			},
 			showClass(item) {
-				// uni.navigateTo({
-				//     url: 'pages/classInfo'   /*这是跳转到的页面路径，？id=1这些都是传递的数据，可以直接在test页面接受
-				// });
 				uni.navigateTo({
-					url: '/pages/classInfo/classInfo'
+					url: '/pages/AddClass/AddClass?type=r&id=' + item.id
 				});
-
-				this.setClassId(item)
-
-				console.log(this.$store.state.classinfo.classid, this.$store.state.classinfo.classname)
 			},
 			showAdd() {
 				uni.navigateTo({
@@ -74,41 +87,39 @@
 				});
 			},
 			deleteClass(item) {
-				// var id = item.id
-				// // this.allclass.forEach(index=>{
-				// // 	if(id == index.id){
-				// // 		return true
-				// // 	}
-				// // })
-				// // this.allclass.splice(id-1,1)
-				// consol.log(id)
-				// console.log(item.id)
+				uni.request({
+					method: "POST",
+					url: `${this.url}/admin/class/remove/${item.id}`,
+					data: {
 
-				var i = this.allclass.length - 1
-				for (i; i >= 0; i--) {
-					if (this.allclass[i].classid === item.classid) {
-						this.allclass.splice(i, 1);
+					},
+					success: (e) => {
+						if (e.data.code === 200) {
+							uni.showModal({
+								content: '删除成功',
+								showCancel: false
+							})
+							this.search()
+						} else {
+							uni.showModal({
+								content: e.data.message,
+								showCancel: false
+							})
+						}
+					},
+					fail: (e) => {
+						uni.showModal({
+							content: "请求失败，请重试！",
+							showCancel: false
+						})
 					}
-				}
+				})
 			},
-			...mapMutations(['setClassId'])
 		},
 		onLoad() { //创建全局监听自定义事件  改变内容
-			uni.$on('addclass', classinfo => {
-				// console.log(111)
-				console.log('classinfo', classinfo)
-				let newclassinfo={}
-				newclassinfo.Manage = classinfo.Manage
-				newclassinfo.Name = classinfo.Name
-				newclassinfo.StudentNumber=classinfo.StudentNumber
-				newclassinfo.classid=classinfo.classid
-				this.allclass.push(newclassinfo)
-				console.log('allclass', this.allclass)
-			})
+			this.search()
 		},
-		onUnload() {
-			uni.$off('addclass');
-		}
+
 	}
 </script>
 

@@ -103,7 +103,7 @@
 					}
 					if (roleId === 2) {
 						uni.switchTab({
-							url: '/pages//AddClass/AddClass',
+							url: '/pages/scheduleschedule/schedule',
 							success: () => {
 							    plus.navigator.closeSplashscreen();
 							}

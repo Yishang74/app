@@ -42,7 +42,7 @@
 			let userInfoToken = uni.getStorageSync('uerInfo').token;
 			console.log("userInfoTokenSync:", userInfoToken)
 			uni.request({
-				url: `http://127.0.0.1:8080/getStudentInfo`,
+				url: `http://127.0.0.1:8080/admin/student/update`,
 				header: {
 					"Content-Type": "application/x-www-form-urlencoded",
 					'Authorization': userInfoToken

@@ -17,15 +17,7 @@
                     controlWeek:1,//显示的第几周
                     weekButton:true,//开启上一周下一周按钮
                     startdDate:'', //开始时间  默认为当前时间
-					// <view v-for="(u,index) in user" :key="index">
-					// </view>
-                    timetables: [
-                      ['ML', 'ML', '', '', '', '', 'Project', 'Project',],
-                      ['', '', 'SAT', 'SAT', '', 'SE', 'SE', '', '', '', '', ''],
-                      ['WPS', 'WPS', 'HCI', 'HCI', '', '', '', '', ''],
-                      ['', '', '', '', 'AE', 'AE', '', '', ''],
-                      ['', '', 'IP', 'FOS', '', '', '', '', ''],
-                    ],
+                    timetables: [],
                     timetableType:[ 
                        { index: '1', name: '08:00\n08:40' },
                        { index: '2', name: '08:50\n09:30' },
@@ -41,33 +33,28 @@
                        { index: '12', name: '21:40\n22:20'}]
                 }
             },
-			onReady() {
-				let userInfoToken = uni.getStorageSync('uerInfo').token;
-				console.log("userInfoTokenSync:", userInfoToken)
-				uni.request({
-					url: `http://127.0.0.1:8080/`,
-					header: {
-						"Content-Type": "application/x-www-form-urlencoded",
-						'Authorization': userInfoToken
-					},
-					data: {},
-					method: "GET",
-					success: (e) => {
-						console.log(e.data)
-						if (e.data.code === 200) {
-							
-						} else {
-							uni.showModal({
-								content: e.data.message,
-								showCancel: false
-							})
-						}
+			mounted() {
+				var userInfo = JSON.parse(sessionStorage.getItem("userInfo"))
+				this.$axios.get("/getSchedultStudent/"+this.controlWeek+'/'+userInfo.id).then(res=>{
+					if(res.code = 200){
+						this.timetables = res.data.data
+						
 					}
 				})
 			},
             methods:{
                 courseClick(re){
+                    var userInfo = JSON.parse(sessionStorage.getItem("userInfo"))
                     console.log(re)
+                     this.$axios.get("/getScheduleCourseStudent",{
+                    	 params:{
+                    		 studentId:userInfo.id,
+                    		 name:re.name
+                    	 }
+                     }).then(res=>{
+                    	
+                     	console.log(res)
+                     })
                 },
                 nextWeekClick(e){
                     console.log("Next Week",e)

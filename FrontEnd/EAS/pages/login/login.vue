@@ -81,11 +81,11 @@
 					},
 					data: {
 						"phoneNumber": name,
-						"password": password
+						"password": password,
+						"roleId":this.roleId
 					},
 					method: "POST",
 					success: (e) => {
-						console.log(e.data)
 						if (e.statusCode !== 200) {
 							uni.showModal({
 								content: "用户名密码错误！",
@@ -94,13 +94,13 @@
 							return;
 						}
 						if (e.data.code === 200) {
-							console.log("e.data.data",e.data.data)
 							this.login(e.data.data);
 							this.setRoleId(this.roleId);
 							
 							// uni.navigateTo({
 							// 	url: '/pages/index/index'
 							// });
+							sessionStorage.setItem("userInfo",JSON.stringify(e.data.data.userInfo))
 							if (this.roleId === 0) {
 								uni.switchTab({
 									url: '/pages/selfInfomation/selfInfomation',
@@ -127,9 +127,10 @@
 										location.reload();
 									},
 								});
-							}
+							
 						} 
-						else {
+						
+						}else {
 							uni.showModal({
 								content: e.data.message,
 								showCancel: false
