@@ -1,16 +1,16 @@
 <template>
 	<view>
-		<u-search placeholder="班级名称" v-model="keyword" @search="search" @custom="search"></u-search>
+		<u-search placeholder="Class name" v-model="keyword" @search="search" @custom="search"></u-search>
 		<u-table style="padding: -20upx 0; ">
 			<u-tr class="myclass">
 				<u-th>id</u-th>
-				<u-th>班级名称</u-th>
-				<u-th>操作</u-th>
+				<u-th>class name</u-th>
+<!-- 				<u-th>操作</u-th> -->
 			</u-tr>
 			<u-tr v-for="item in allclass">
 				<u-td>{{item.id}}</u-td>
 				<u-td style="color: #54b4ef;"><span @click="showClass(item)">{{item.className}}</span></u-td>
-				<u-td style="color: orangered;"><span @click="deleteClass(item)">删除</span></u-td>
+<!-- 				<u-td style="color: orangered;"><span @click="deleteClass(item)">删除</span></u-td> -->
 			</u-tr>
 
 		</u-table>

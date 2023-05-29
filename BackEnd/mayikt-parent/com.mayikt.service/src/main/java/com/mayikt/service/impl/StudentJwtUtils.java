@@ -1,7 +1,9 @@
 package com.mayikt.service.impl;
 
 import com.mayikt.common.core.utils.DesensitizationUtil;
+import com.mayikt.entity.Admin;
 import com.mayikt.entity.Student;
+import com.mayikt.entity.Teacher;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -26,8 +28,34 @@ public class StudentJwtUtils {
         String token = Jwts
                 .builder()
                 .setSubject(SUBJECT)
-                .claim("userId", student.getStudentId())
-                .claim("phone", DesensitizationUtil.mobileEncrypt(student.getStudentPhone().toString()))
+                .claim("userId", student.getId())
+                .claim("phone", DesensitizationUtil.mobileEncrypt(student.getPhone().toString()))
+                .setIssuedAt(new Date())
+                // 设置过期时间
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRITION))
+                .signWith(SignatureAlgorithm.HS256, APPSECRET_KEY).compact();
+        return token;
+    }
+
+    public static String generateJsonWebTokenTeacher(Teacher teacher) {
+        String token = Jwts
+                .builder()
+                .setSubject(SUBJECT)
+                .claim("userId", teacher.getId())
+                .claim("phone", DesensitizationUtil.mobileEncrypt(teacher.getPhone().toString()))
+                .setIssuedAt(new Date())
+                // 设置过期时间
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRITION))
+                .signWith(SignatureAlgorithm.HS256, APPSECRET_KEY).compact();
+        return token;
+    }
+
+    public static String generateJsonWebTokenAdmin(Admin admin) {
+        String token = Jwts
+                .builder()
+                .setSubject(SUBJECT)
+                .claim("userId", admin.getId())
+                .claim("phone", DesensitizationUtil.mobileEncrypt(admin.getPhone().toString()))
                 .setIssuedAt(new Date())
                 // 设置过期时间
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRITION))

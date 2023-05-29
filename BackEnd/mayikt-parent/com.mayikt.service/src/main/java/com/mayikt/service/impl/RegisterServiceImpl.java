@@ -31,7 +31,7 @@ public class RegisterServiceImpl extends BaseApiService implements RegisterServi
         }
         //2.判断手机号码是否存在如果存在则无法注册
         QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("student_phone", phoneNumber);
+        queryWrapper.eq("phone", phoneNumber);
         Student studentDB = studentMapper.selectOne(queryWrapper);
         if (studentDB != null) {
             return setResultError("手机号码已经存在无法注册.");

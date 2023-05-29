@@ -122,6 +122,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/selfInfomation/teacherInformation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#7A7E83",
@@ -158,6 +167,10 @@
 			{
 				"pagePath": "pages/userInfo/userInfo",
 				"text": "userInfo"
+			},
+			{
+				"pagePath": "pages/selfInfomation/teacherInformation",
+				"text": "teacherInfo"
 			}
 		]
 	},

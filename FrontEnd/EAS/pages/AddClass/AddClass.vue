@@ -3,56 +3,48 @@
 	<view class="">
 		<u-form :model="form" ref="uForm">
 
-			<u-form-item label="班级名称" prop="name" label-width="150">
+			<u-form-item label="班级名称" label-width="150">
 				<u-input v-model="form.name" />
 			</u-form-item>
-			<u-form-item label="课程" prop="kecheng" label-width="150">
-<!-- 				<u-input v-model="form.kecheng" @click="kechengShow = true" /> -->
-			<u-checkbox-group @change="checkboxGroupChange">
-<!-- 				<u-checkbox v-model="item.checked" v-for="(item, index) in xsList" :key="index" :name="item.id">
-					{{item.username}}</u-checkbox> -->
-			</u-checkbox-group>	
+			<u-form-item label="课程"  label-width="150">
+				<u-input v-model="form.kecheng" @click="kechengShow = true" />
 			</u-form-item>
-			<u-form-item label="周" label-width="150" prop="likeFruit">
-				<u-checkbox-group @change="checkboxGroupChange">
-					<u-checkbox v-model="item.checked" v-for="(item, index) in weekList" :key="index">
+			<u-form-item label="周" label-width="150" prop="form.week" >
+				<checkbox-group @change="checkboxGroupChangeZhou">
+					<checkbox  v-model="index" v-for="(item, index) in weekList" :key="index">
 						{{item}}
-					</u-checkbox>
-				</u-checkbox-group>
+					</checkbox>
+				</checkbox-group>
 			</u-form-item>
-			<u-form-item label="星期" label-width="150" prop="likeFruit">
-				<u-checkbox-group @change="checkboxGroupChange">
-					<u-checkbox  v-model="item.checked" v-for="(item, index) in weekdayList" :key="index">
+			<u-form-item label="星期" label-width="150" prop="form.day">
+				<checkbox-group @change="checkboxGroupChangeXingqi">
+					<checkbox v-model="index"  v-for="(item, index) in weekdayList" :key="index">
 						{{item}}
-					</u-checkbox>
-				</u-checkbox-group>
+					</checkbox>
+				</checkbox-group>
 			</u-form-item>
-			<u-form-item label="时间段" label-width="150" prop="likeFruit">
-				<u-checkbox-group @change="checkboxGroupChange">
-					<u-checkbox  v-model="item.checked" v-for="(item, index) in timeList" :key="index">
+			<u-form-item label="时间段" label-width="150" prop="form.timeTable" >
+				<checkbox-group @change="checkboxGroupChangeShijianduan">
+					<checkbox v-model="index"  v-for="(item, index) in timeList" :key="index">
 						{{item}}
-					</u-checkbox>
-				</u-checkbox-group>
+					</checkbox>
+				</checkbox-group>
 			</u-form-item>
-			<u-form-item label="老师" prop="laoshi" label-width="150">
-<!-- 				<u-input v-model="form.laoshi" @click="laoshiShow = true" /> -->
-				<u-checkbox-group @change="checkboxGroupChange">
-<!-- 					<u-checkbox v-model="item.checked" v-for="(item, index) in xsList" :key="index" :name="item.id">
-						{{item.username}}</u-checkbox> -->
-				</u-checkbox-group>
+			<u-form-item label="老师"  label-width="150">
+				<u-input v-model="form.laoshi" @click="laoshiShow = true" />
 			</u-form-item>
-			<u-form-item label="学生" label-width="150" prop="likeFruit">
+			<u-form-item label="学生" label-width="150" prop="form.student">
 				<u-checkbox-group @change="checkboxGroupChange">
 					<u-checkbox v-model="item.checked" v-for="(item, index) in xsList" :key="index" :name="item.id">
 						{{item.username}}</u-checkbox>
 				</u-checkbox-group>
 			</u-form-item>
-			<u-form-item label="课程地点" prop="name" label-width="150">
-				<u-input v-model="form.name" />
+			<u-form-item label="课程地点" label-width="150">
+				<u-input v-model="form.didian" />
 			</u-form-item>
 			<view class="myop">
-				<u-button @click="submit" class="add">保存</u-button>
-				<u-button @click='back' class="back">取消</u-button>
+				<u-button @click="submit" class="add">Save</u-button>
+				<u-button @click='back' class="back">Canel</u-button>
 			</view>
 		</u-form>
 		<view>
@@ -81,8 +73,11 @@
 				xsList: [],
 				xsSelect: [],
 				weekList: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+				weekSelect: [],
 				timeList: ['08:00-08:40','08:50-09:30','09:40-10:20','10:30-11:10','11:20-12:00','14:00-14:40','15:50-16:30','16:40-17:20','17:30-18:10','19:00-19:40','20:50-21:30','21:40-22:20'],
+				timeSelect: [],
 				weekdayList: [1,2,3,4,5,6,7],
+				weekdaySelect: [],				
 				url: 'http://127.0.0.1:8080',
 				kechengShow: false,
 				laoshiShow: false,
@@ -91,7 +86,12 @@
 					kecheng: '',
 					laoshi: '',
 					kechengId: '',
-					laoshiId: ''
+					laoshiId: '',
+					didian: '',
+					week:'',
+					day:'',
+					student:'',
+					timeTable:''
 				},
 
 				rules: {
@@ -156,7 +156,21 @@
 			},
 			// 选中任一checkbox时，由checkbox-group触发
 			checkboxGroupChange(e) {
-				this.xsSelect = e;
+				console.log(e)
+				this.form.student = e;
+			},
+			checkboxGroupChangeZhou(e) {
+				console.log(e.detail.value)
+				// this.weekSelect = e.detail.value;
+				this.form.week = e.detail.value
+			},
+			checkboxGroupChangeXingqi(e) {
+				console.log(e.detail.value)
+				this.form.day  = e.detail.value;
+			},
+			checkboxGroupChangeShijianduan(e) {
+				console.log(e.detail.value)
+				this.form.timeTable  = e.detail.value;
 			},
 			//获取课程
 			getkcData() {
@@ -283,7 +297,7 @@
 			},
 
 			submit() {
-				if (this.xsSelect.length == 0) {
+				if (this.form.student.length == 0) {
 					this.$refs.uToast.show({
 						title: '请选择学生',
 						type: 'info',
@@ -293,6 +307,7 @@
 				}
 				this.$refs.uForm.validate(valid => {
 					if (valid) {
+						console.log(this.form)
 						this.addClass()
 					} else {
 						console.log('验证失败');
@@ -301,38 +316,22 @@
 
 			},
 			addClass() {
-				let that = this
-				let subUrl = `/admin/class/save`
-				let data = {
-					"className": this.form.name
-				}
-				if (that.type) {
-					subUrl = `/admin/class/update`
-					data = {
-						"className": that.form.name,
-						"id": that.id
-					}
-				}
-				uni.request({
-					url: that.url + subUrl,
-					data: data,
-					method: "POST",
-					success: (e) => {
-						if (e.data.code === 200) {
-							if(!that.type){
-								that.id = e.data.data
-							}
-							
-							that.addStudent(that.id)
-							that.addLaoshi(that.id)
-							that.addkecheng(that.id)
-
-						} else {
-							uni.showModal({
-								content: e.data.message,
-								showCancel: false
-							})
-						}
+				this.$axios.post("/admin/class/save",{
+					className :this.form.name,
+					courseId :this.form.kechengId,
+					teacherId :this.form.laoshiId,
+					week_no:this.form.week,
+					day_no:this.form.day,
+					location: this.form.didian,
+					studentId:this.form.student,
+					timeTableId:this.form.timeTable
+					
+				}).then(res=>{
+					console.log(res)
+					if(res.code=200){
+						uni.switchTab({
+							url:'/pages/class/class'
+						})
 					}
 				})
 			},
@@ -409,7 +408,108 @@
 					}
 				})
 			},
-
+			addZhou(id) {
+				uni.request({
+					url: this.url + `/admin/class/doAssignStudent`,
+					data: {
+						"type":this.type,
+						"classId": id,
+						"studentIds": this.weekSelect
+					},
+					method: "POST",
+					success: (e) => {
+						if (e.data.code === 200) {
+							this.$refs.uToast.show({
+								title: '添加成功',
+								type: 'success',
+								duration: 1000
+							})
+				
+						} else {
+							uni.showModal({
+								content: e.data.message,
+								showCancel: false
+							})
+						}
+					}
+				})
+			},
+			addXingqi(id) {
+				uni.request({
+					url: this.url + `/admin/class/doAssignStudent`,
+					data: {
+						"type":this.type,
+						"classId": id,
+						"studentIds": this.weekdaySelect
+					},
+					method: "POST",
+					success: (e) => {
+						if (e.data.code === 200) {
+							this.$refs.uToast.show({
+								title: '添加成功',
+								type: 'success',
+								duration: 1000
+							})
+				
+						} else {
+							uni.showModal({
+								content: e.data.message,
+								showCancel: false
+							})
+						}
+					}
+				})
+			},
+			addShijianduan(id) {
+				uni.request({
+					url: this.url + `/admin/class/doAssignStudent`,
+					data: {
+						"type":this.type,
+						"classId": id,
+						"studentIds": this.timeSelect
+					},
+					method: "POST",
+					success: (e) => {
+						if (e.data.code === 200) {
+							this.$refs.uToast.show({
+								title: '添加成功',
+								type: 'success',
+								duration: 1000
+							})
+				
+						} else {
+							uni.showModal({
+								content: e.data.message,
+								showCancel: false
+							})
+						}
+					}
+				})
+			},
+			addDidian(id) {
+				uni.request({
+					url: this.url + ``,
+					data: {
+						"DidianName": this.form.didian
+					},
+					method: "POST",
+					success: (e) => {
+						if (e.data.code === 200) {
+							this.$refs.uToast.show({
+								title: '添加成功',
+								type: 'success',
+								duration: 1000
+							})
+			
+						} else {
+							uni.showModal({
+								content: e.data.message,
+								showCancel: false
+							})
+						}
+					}
+				})
+			},
 			back() {
 				uni.switchTab({
 					url:'/pages/class/class'

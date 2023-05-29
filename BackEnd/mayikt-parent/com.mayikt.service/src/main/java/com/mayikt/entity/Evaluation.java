@@ -2,8 +2,11 @@ package com.mayikt.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -13,37 +16,22 @@ import java.time.LocalDateTime;
  * @author bruce
  * @since 2022-12-12
  */
+@Data
+@TableName("evaluation")
 public class Evaluation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-      @TableId(value = "evaluation_id", type = IdType.AUTO)
-    private Integer evaluationId;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
-    private LocalDateTime evaluationDate;
+    private String content;
 
+    private Date evaluationTime;
 
-    public Integer getEvaluationId() {
-        return evaluationId;
-    }
+    private Integer objectId;
 
-    public void setEvaluationId(Integer evaluationId) {
-        this.evaluationId = evaluationId;
-    }
+    private Integer userId;
 
-    public LocalDateTime getEvaluationDate() {
-        return evaluationDate;
-    }
-
-    public void setEvaluationDate(LocalDateTime evaluationDate) {
-        this.evaluationDate = evaluationDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Evaluation{" +
-        "evaluationId=" + evaluationId +
-        ", evaluationDate=" + evaluationDate +
-        "}";
-    }
+    private String type;
 }

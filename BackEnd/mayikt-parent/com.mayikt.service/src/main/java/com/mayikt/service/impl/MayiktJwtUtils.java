@@ -8,7 +8,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -28,7 +27,7 @@ public class MayiktJwtUtils {
                 .builder()
                 .setSubject(SUBJECT)
                 .claim("userId", sysUser.getId())
-                .claim("phone", DesensitizationUtil.mobileEncrypt(sysUser.getPhoneNumber()))
+                .claim("phone", DesensitizationUtil.mobileEncrypt(sysUser.getPhone()))
                 .setIssuedAt(new Date())
                 // 设置过期时间
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRITION))

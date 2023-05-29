@@ -6,15 +6,15 @@
 		<u-table style="padding: -20upx 0; ">
 			<u-tr class="myclass">
 				<u-th>id</u-th>
-				<u-th>姓名</u-th>
-				<u-th>电话</u-th>
-				<u-th>操作</u-th>
+				<u-th>Name</u-th>
+				<u-th>Phone</u-th>
+				<u-th>Operate</u-th>
 			</u-tr>
 			<u-tr v-for="item in allclass">
 				<u-td>{{item.id}}</u-td>
 				<u-td style="color: #54b4ef;"><span @click="showClass(item)">{{item.username}}</span></u-td>
 				<u-td>{{item.phone}}</u-td>
-				<u-td style="color: orangered;"><span @click="deleteClass(item)">删除</span></u-td>
+				<u-td style="color: orangered;"><span @click="deleteClass(item)">delete</span></u-td>
 			</u-tr>
 
 		</u-table>
@@ -28,7 +28,7 @@
 		<view>
 			<u-select v-model="kechengShow" :list="kechengList" @confirm="selectkcConfirm"></u-select>
 		</view>
-		<u-button type="primary" @click="bindLogout">退出</u-button>
+		<u-button type="primary" @click="bindLogout">Log out</u-button>
 		<!-- <u-modal v-model="showwarning" :content="content"  show-cancel-button="true" title="Warning"></u-modal> -->
 	</view>
 

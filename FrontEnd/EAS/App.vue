@@ -27,6 +27,10 @@
 						index: 1,
 						visible: false,
 					})
+					uni.setTabBarItem({
+						index: 7,
+						visible: false,
+					})
 				} 
 				//权限1
 				if (userType == 1) {
@@ -70,6 +74,10 @@
 					})
 					uni.setTabBarItem({
 						index: 6,
+						visible: false,
+					})
+					uni.setTabBarItem({
+						index: 7,
 						visible: false,
 					})
 				}

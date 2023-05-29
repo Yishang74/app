@@ -5,9 +5,7 @@ import com.mayikt.common.core.api.BaseApiService;
 import com.mayikt.common.core.api.BaseResponse;
 import com.mayikt.common.core.utils.MayiktBeanUtils;
 import com.mayikt.entity.Student;
-import com.mayikt.entity.SysUser;
 import com.mayikt.mapper.StudentMapper;
-import com.mayikt.service.MayiktService;
 import com.mayikt.service.StudentInfoService;
 import com.mayikt.service.dto.StudentResDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ public class StudentInfoServiceImpl extends BaseApiService implements StudentInf
         System.out.println(authorization);
         String phoneNumber=StudentJwtUtils.getPhone(authorization);
         QueryWrapper<Student> sysUserQueryWrapper = new QueryWrapper<>();
-        sysUserQueryWrapper.eq("student_phone", phoneNumber);
+        sysUserQueryWrapper.eq("phone", phoneNumber);
         Student studentDB = studentMapper.selectOne(sysUserQueryWrapper);
         StudentResDto studentResDto = MayiktBeanUtils.doToDto(studentDB, StudentResDto.class);
         return setResultSuccessData(studentResDto);

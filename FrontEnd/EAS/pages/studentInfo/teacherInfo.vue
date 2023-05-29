@@ -2,20 +2,20 @@
 	<view>
 		<u-form :model="form" ref="uForm" style="margin-left: 10px;">
 
-			<u-form-item label="姓名" prop="username" label-width="150">
-				<u-input v-model="form.username" placeholder="请输入姓名" />
+			<u-form-item label="Name" prop="username" label-width="150">
+				<u-input v-model="form.username" placeholder="Name" />
 			</u-form-item>
-			<u-form-item label="年龄" prop="age" label-width="150">
-				<u-input v-model="form.age" type="number" placeholder="请输入年龄" />
+			<u-form-item label="Age" prop="age" label-width="150">
+				<u-input v-model="form.age" type="number" placeholder="Age" />
 			</u-form-item>
-			<u-form-item label="手机号" prop="phone" label-width="150">
-				<u-input v-model="form.phone" type="number" placeholder="请输入手机号" />
+			<u-form-item label="Phone" prop="phone" label-width="150">
+				<u-input v-model="form.phone" type="number" placeholder="Phone" />
 			</u-form-item>
-			<u-form-item label="密码" prop="password">
-				<u-input :password-icon="true" type="password" v-model="form.password" placeholder="请输入密码"></u-input>
-			</u-form-item>
-			<u-form-item label="毕业学校" prop="university" label-width="150">
-				<u-input v-model="form.university" placeholder="请输入学校" />
+<!-- 			<u-form-item label="Password" prop="password">
+				<u-input :password-icon="true" type="password" v-model="form.password" placeholder="Password"></u-input>
+			</u-form-item> -->
+			<u-form-item label="university" prop="university" label-width="150">
+				<u-input v-model="form.university" placeholder="university" />
 			</u-form-item>
 
 			<view class="myop">
@@ -125,7 +125,7 @@
 					success: (e) => {
 						if (e.data.code === 200) {
 							uni.showModal({
-								content: '保存成功',
+								content: 'Successfully saved',
 								showCancel: false
 							})
 						} else {

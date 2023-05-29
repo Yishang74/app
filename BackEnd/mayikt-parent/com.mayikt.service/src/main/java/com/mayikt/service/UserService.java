@@ -1,7 +1,6 @@
 package com.mayikt.service;
 
 import com.mayikt.common.core.api.BaseResponse;
-import com.mayikt.entity.SysUser;
 import com.mayikt.service.dto.UserResDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

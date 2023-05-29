@@ -2,27 +2,30 @@
 	<view>
 		<u-form :model="form" ref="uForm" style="margin-left: 10px;">
 
-			<u-form-item label="姓名" prop="username" label-width="150">
-				<u-input v-model="form.username" placeholder="请输入姓名" />
+			<u-form-item label="Name" prop="username" label-width="150">
+				<u-input v-model="form.username" placeholder="name" />
 			</u-form-item>
-			<u-form-item label="性别" prop="sex" label-width="150">
-				<u-input v-model="form.sexname" @click="kechengShow = true" placeholder="请选择性别" />
+			<u-form-item label="Sex" prop="sex" label-width="150">
+				<u-input v-model="form.sexname" @click="kechengShow = true" placeholder="sex" />
 			</u-form-item>
-			<u-form-item label="手机号" prop="phone" label-width="150">
-				<u-input v-model="form.phone" type="number" placeholder="请输入手机号" />
+			<u-form-item label="Phone" prop="phone" label-width="150">
+				<u-input v-model="form.phone" type="number" placeholder="phone" />
 			</u-form-item>
 			<!-- <u-form-item label="密码" prop="password">
 				<u-input :password-icon="true" type="password" v-model="form.password" placeholder="请输入密码"></u-input>
 			</u-form-item> -->
-			<u-form-item label="学校" prop="name" label-width="150">
-				<u-input v-model="form.school" placeholder="请输入学校" />
+			<u-form-item label="School" prop="name" label-width="150">
+				<u-input v-model="form.school" placeholder="school" />
 			</u-form-item>
-			<u-form-item label="父母手机号" prop="form.parent_phone" label-width="150">
-				<u-input v-model="form.parentPhone" type="number" placeholder="请输入手机号" />
+			<u-form-item label="Parent's phone" prop="form.parent_phone" label-width="150">
+				<u-input v-model="form.parentPhone" type="number" placeholder="phone" />
 			</u-form-item>
+			<u-form-item label="Evaluate" prop="form.evaluate" label-width="150">
+				<u-input v-model="form.evaluate" type="number" placeholder="Evaluate" />
+			</u-form-item>			
 			<view class="myop">
-				<u-button @click="submit" class="add">保存</u-button>
-				<u-button @click='back' class="back">返回</u-button>
+				<u-button @click="submit" class="add">save</u-button>
+				<u-button @click='back' class="back">cancel </u-button>
 			</view>
 		</u-form>
 		<view>
@@ -47,6 +50,7 @@
 					school: '',
 					password: '',
 					parent_phone: '',
+					evaluate: '',
 				},
 				kechengList: [{
 						value: '1',
@@ -146,7 +150,7 @@
 					success: (e) => {
 						if (e.data.code === 200) {
 							uni.showModal({
-								content: '保存成功',
+								content: 'Successfully saved',
 								showCancel: false
 							})
 						} else {
@@ -160,7 +164,7 @@
 			},
 			back() {
 				uni.switchTab({
-					url: '/pages/userInfo/userInfo'
+					url: '/pages/classInformation/classInformation'
 				})
 			},
 		},

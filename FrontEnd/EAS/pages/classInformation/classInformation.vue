@@ -6,7 +6,7 @@
 			</u-cell-group>
 			<u-gap height="15" bg-color="#f9f9f9"></u-gap>
 		</u-cell-group>
-		<button type="primary" @click="bindLogout">Log out</button>
+<!-- 		<button type="primary" @click="bindLogout">Log out</button> -->
 	</view>
 </template>
 

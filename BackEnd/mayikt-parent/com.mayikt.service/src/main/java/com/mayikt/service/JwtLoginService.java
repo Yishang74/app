@@ -14,7 +14,7 @@ public interface JwtLoginService {
      * @return
      */
     @PostMapping("loginJwt")
-    BaseResponse<String> loginJwt(String phoneNumber, String password);
+    BaseResponse<String> loginJwt(String phoneNumber, String password,Integer roleId);
 
     /**
      * jwt 验证

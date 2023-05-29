@@ -25,33 +25,30 @@ public class StudentResDto implements Serializable {
 
 
 
-    private String studentName;
+    private String username;
 
-    private String studentSex;
+    private String sex;
 
-    private String studentPhone;
+    private String phone;
 
-    private Integer studentClasshours;
+    private Integer classHours;
 
-    private String studentSchool;
+    private String school;
 
-    private String studentMajor;
+    private String major;
 
-    private String studentGrade;
+    private String grade;
 
-    private LocalDate studentGoabroadtime;
+    private LocalDate goAbroadTime;
 
     private String studentDescribe;
 
-    private Integer studentParentphone;
+    private Integer parentPhone;
 
-    private String studentFailedcourses;
+    private String failedCourses;
 
-    private String studentApplicationobjective;
+    private String applicationObjective;
 
-    private LocalDate studentExaminationtime;
+    private LocalDate examinationTime;
 
-    public String getPhoneNumber() {
-        return DesensitizationUtil.mobileEncrypt(studentPhone);
-    }
 }

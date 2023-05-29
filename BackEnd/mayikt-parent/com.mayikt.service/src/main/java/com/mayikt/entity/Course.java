@@ -2,6 +2,9 @@ package com.mayikt.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -12,37 +15,20 @@ import java.io.Serializable;
  * @author bruce
  * @since 2022-12-12
  */
+
+@Data
+@TableName("course")
 public class Course implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-      @TableId(value = "course_id", type = IdType.AUTO)
-    private Integer courseId;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
-    private String courseName;
+    private String name;
 
+    private Integer type;
 
-    public Integer getCourseId() {
-        return courseId;
-    }
+    private Integer count;
 
-    public void setCourseId(Integer courseId) {
-        this.courseId = courseId;
-    }
-
-    public String getCourseName() {
-        return courseName;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-        "courseId=" + courseId +
-        ", courseName=" + courseName +
-        "}";
-    }
 }
